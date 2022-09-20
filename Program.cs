@@ -10,43 +10,54 @@ namespace Wiederholung_Methoden
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Wurzel(2));
+            Console.WriteLine(Wurzel(0.5));
         }
 
         static double Wurzel(double zahl)
         {
             double untereGrenze = 1;
-            double obereGrenze = 2;
+            double obereGrenze = zahl;
             double result;
-            double mitte = (obereGrenze + untereGrenze) / 2;
-            for(int k = 0; k < 100; k++)
+            double middle = mitte(zahl, obereGrenze, untereGrenze);
+            while(middle*middle != zahl)
             {
-                mitte = (obereGrenze + untereGrenze) / 2;
-                if (mitte*mitte == 2)
+                if(mitte(zahl, obereGrenze, untereGrenze) < zahl)
                 {
-                    result = mitte;
-                    break;
+                    untereGrenze = mitte(zahl, obereGrenze, untereGrenze);
+                    middle = mitte(zahl, obereGrenze, untereGrenze);
                 }
-
-                else
-                {
-                    if(mitte*mitte < 2)
-                    {
-                        untereGrenze = mitte;
-                    }
-                    else
-                    {
-                        obereGrenze = mitte;
-                    }
-                }
-
             }
-            Console.WriteLine("oG = " + obereGrenze);
-            Console.WriteLine("uG = " + untereGrenze);
-            Console.WriteLine("mitte = " + mitte);
-            result = mitte;
+            //Console.WriteLine("oG = " + obereGrenze);
+            //Console.WriteLine("uG = " + untereGrenze);
+            //Console.WriteLine("mitte = " + mitte);
+            result = middle;
             return result;
 
+        }
+        static double mitte(double zahl, double obereGrenze, double untereGrenze)
+        {
+            double mitte = (obereGrenze + untereGrenze) / 2;
+            return mitte;
+        
+            double result;
+            mitte = (obereGrenze + untereGrenze) / 2;
+            if (mitte * mitte == zahl)
+            {
+                return mitte;
+                
+            }
+
+            else
+            {
+                if (mitte * mitte < zahl)
+                {
+                    untereGrenze = mitte;
+                }
+                else
+                {
+                    obereGrenze = mitte;
+                }
+            }
         }
 
     }
